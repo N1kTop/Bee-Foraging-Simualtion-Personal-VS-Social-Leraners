@@ -1,0 +1,64 @@
+A:
+DEFAULT_CFG = {
+    "BEES_PER_GENERATION": 10,
+    "GENERATIONS_OVERLAP": 10,      # total pop = 100
+    "NUMBER_OF_FLOWERS": 16,
+    "MEAN_REWARD_PER_FLOWER": 10.0,
+    "RICH_VS_POOR_REWARD_RATIO": 20,
+    "STARTING_BEE_RATIO": 0.5,
+    "FORAGING_STEPS_PER_GENERATION": 100,
+    "GENERATIONS": 200,             # increase for stable convergence
+    "CROWDING_PARAMETER": 0.0,      # no competition
+    "MUTATION_RATE": 0.0,           # allow fixation
+    "REPEATS": 30,                  # statistical stability
+    "PLOT": True,
+    "SEED": 42,
+}
+
+rich_counts = [16, 4, 2]   # uniform vs jackpot-like
+crowdings = [0.0]          # fixed
+overlaps = [10]            # fixed
+
+
+B:
+DEFAULT_CFG = {
+    "BEES_PER_GENERATION": 10,
+    "GENERATIONS_OVERLAP": 10,
+    "NUMBER_OF_FLOWERS": 16,
+    "MEAN_REWARD_PER_FLOWER": 10.0,
+    "RICH_VS_POOR_REWARD_RATIO": 20,
+    "STARTING_BEE_RATIO": 0.5,
+    "FORAGING_STEPS_PER_GENERATION": 100,
+    "GENERATIONS": 200,
+    "CROWDING_PARAMETER": 1.0,      # full sharing
+    "MUTATION_RATE": 0.0,
+    "REPEATS": 30,
+    "PLOT": True,
+    "SEED": 42,
+}
+
+rich_counts = [16, 4, 2]
+crowdings = [1.0]
+overlaps = [10]
+
+
+C:
+DEFAULT_CFG = {
+    "BEES_PER_GENERATION": 10,
+    "GENERATIONS_OVERLAP": 10,
+    "NUMBER_OF_FLOWERS": 16,
+    "MEAN_REWARD_PER_FLOWER": 10.0,
+    "RICH_VS_POOR_REWARD_RATIO": 20,
+    "STARTING_BEE_RATIO": 0.5,
+    "FORAGING_STEPS_PER_GENERATION": 100,
+    "GENERATIONS": 200,
+    "CROWDING_PARAMETER": 0.4,
+    "MUTATION_RATE": 0.01,      # prevents fixation
+    "REPEATS": 30,
+    "PLOT": True,
+    "SEED": 42,
+}
+
+rich_counts = [16, 4, 2]
+crowdings = [0.4]
+overlaps = [10]

@@ -1,0 +1,18 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+venv/
+
+# OS stuff
+.DS_Store
+Thumbs.db
+
+# VS Code (optional)
+.vscode/
+
+# Matplotlib outputs / results (optional)
+*.png
+*.csv
