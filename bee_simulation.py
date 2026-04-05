@@ -32,7 +32,7 @@ Key Features:
 Usage:
 - Run this file directly for interactive simulation
 - Use batch_runner.py or variance_batch_runner.py for experiments
-- Use launcher.py for 
+- Use launcher.py for better config preset manager
 
 Notes:
 - All parameters are controlled via the CFG dictionary
@@ -49,6 +49,7 @@ from typing import Optional
 
 # Central configuration for simulation behaviour, rendering, and tuning parameters
 CFG = {
+    # --- Window ---
     "WIDTH": 1600,
     "HEIGHT": 900,
     "WORLD_WIDTH": 1100,                # simulation area

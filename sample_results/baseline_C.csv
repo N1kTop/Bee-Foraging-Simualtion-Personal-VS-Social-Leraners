@@ -1,0 +1,4 @@
+crowding,overlap,total_pop,rich_count,final_social_mean,final_social_std,fixation_rate,mean_fixation_time,mutation_rate,rich_vs_poor_ratio,num_flowers,generations,steps_per_gen,bees_per_generation,generations_overlap
+0.4,10,100,16,0.41200000000000003,0.2472839124029975,0.0,122.5,0.01,20,16,200,100,10,10
+0.4,10,100,4,0.5166666666666667,0.2325558475339251,0.0,,0.01,20,16,200,100,10,10
+0.4,10,100,2,0.4433333333333333,0.3005254657355272,0.0,120.0,0.01,20,16,200,100,10,10
