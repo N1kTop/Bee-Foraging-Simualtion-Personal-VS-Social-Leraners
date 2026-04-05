@@ -1,7 +1,37 @@
-import random
+"""
+Batch Experiment Runner for Bee Foraging Simulation
+
+Author: NikTop
+Date: 03/03/2026
+
+Description:
+This script runs repeated simulation experiments to collect quantitative data
+on the evolution of social vs personal learning strategies.
+
+It executes multiple independent runs (with different random seeds) and records:
+- Population counts (social vs personal)
+- Average rewards per strategy
+- Evolution over generations
+
+Results are saved as:
+- CSV files for analysis
+- Matplotlib plots for visualisation
+
+Usage:
+- Run directly to generate results:
+    python batch_runner.py
+
+- Output files:
+    simulation_results.csv
+    population_<mode>.png
+
+Notes:
+- Uses the Simulation class from bee_simulation.py
+- Designed for controlled experiments with fixed parameters
+- Does NOT render graphics (faster than visual simulation)
+"""
+
 import csv
-import math
-import os
 import matplotlib.pyplot as plt
 
 # import your simulation directly

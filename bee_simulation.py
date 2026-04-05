@@ -926,7 +926,9 @@ def draw_panel(screen, sim, font, font_small):
     )
 
 
-def main():
+def main(cfg=None, start_mode=None):
+    if cfg is None:
+        cfg = CFG
     random.seed(CFG["SEED"])
 
     pygame.init()
