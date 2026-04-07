@@ -264,15 +264,15 @@ def main():
     for rich_count_high in rich_counts_to_test:
         # stable mode is included for completeness,
         # but its variance is always basically 0
-        all_rows.extend(
-            run_one_condition(
-                cfg=local_cfg,
-                mode="stable",
-                rich_count_high=rich_count_high,
-                repeats=repeats,
-                generations=generations
-            )
-        )
+        #all_rows.extend(
+        #    run_one_condition(
+        #        cfg=local_cfg,
+        #        mode="stable",
+        #        rich_count_high=rich_count_high,
+        #        repeats=repeats,
+        #        generations=generations
+        #    )
+        #)
 
         all_rows.extend(
             run_one_condition(

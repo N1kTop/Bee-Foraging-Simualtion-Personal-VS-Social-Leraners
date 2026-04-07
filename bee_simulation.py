@@ -817,7 +817,7 @@ def draw_world_ui(screen, sim, font, font_small):
     y = 15
     line = 24
 
-    draw_text(screen, font, "Bee simulation with social memory buffer", x, y)
+    draw_text(screen, font, "Bee Simulation: Personal VS Social Bees", x, y)
     y += line + 8
 
     rich_count = cfg["NUMBER_OF_FLOWERS"] if sim.mode == "stable" else cfg["RICH_COUNT_HIGH"]
