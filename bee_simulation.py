@@ -16,7 +16,6 @@ Based on:
 
 This simulation implements the agent-based model described in the paper.
 But it differes from the original version in the paper and extends it by:
-- Introducing spatial environments with travel costs
 - Modelling resource depletion and regeneration
 - Adding stochastic environmental noise
 - Supporting dynamic environments with configurable variability
@@ -40,6 +39,7 @@ Notes:
 
 """
 
+import copy
 import math
 import random
 import pygame
@@ -928,94 +928,97 @@ def draw_panel(screen, sim, font, font_small):
 
 def main(cfg=None, start_mode=None):
     if cfg is None:
-        cfg = CFG
-    random.seed(CFG["SEED"])
+        cfg = copy.deepcopy(CFG)
+
+    if start_mode is None:
+        start_mode = "stable"
+
+    random.seed(cfg["SEED"])
 
     pygame.init()
-    screen = pygame.display.set_mode((CFG["WIDTH"], CFG["HEIGHT"]))
+    screen = pygame.display.set_mode((cfg["WIDTH"], cfg["HEIGHT"]))
     pygame.display.set_caption("Bee simulation with social memory buffer")
     clock = pygame.time.Clock()
 
     font = pygame.font.SysFont("arial", 24)
     font_small = pygame.font.SysFont("arial", 18)
 
-    sim = Simulation(CFG)
+    sim = Simulation(cfg)
     paused = False
     running = True
 
     while running:
-        clock.tick(CFG["FPS"])
+        clock.tick(cfg["FPS"])
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
             elif event.type == pygame.KEYDOWN:
-                # Keyboard controls allow parameter tuning during runtime
                 if event.key == pygame.K_SPACE:
                     paused = not paused
 
                 elif event.key == pygame.K_r:
-                    sim = Simulation(CFG)
+                    sim = Simulation(cfg, start_mode=start_mode)
 
                 elif event.key == pygame.K_m:
                     sim.toggle_mode()
 
                 elif event.key == pygame.K_t:
-                    CFG["SHOW_TARGET_LINES"] = not CFG["SHOW_TARGET_LINES"]
+                    cfg["SHOW_TARGET_LINES"] = not cfg["SHOW_TARGET_LINES"]
 
                 elif event.key == pygame.K_d:
-                    CFG["SHOW_DEBUG_RICH"] = not CFG["SHOW_DEBUG_RICH"]
+                    cfg["SHOW_DEBUG_RICH"] = not cfg["SHOW_DEBUG_RICH"]
 
                 elif event.key == pygame.K_n:
-                    CFG["ENABLE_NOISE"] = not CFG["ENABLE_NOISE"]
+                    cfg["ENABLE_NOISE"] = not cfg["ENABLE_NOISE"]
 
                 elif event.key == pygame.K_UP:
-                    CFG["HARVEST_STRENGTH"] = min(2.0, CFG["HARVEST_STRENGTH"] + 0.05)
+                    cfg["HARVEST_STRENGTH"] = min(2.0, cfg["HARVEST_STRENGTH"] + 0.05)
 
                 elif event.key == pygame.K_DOWN:
-                    CFG["HARVEST_STRENGTH"] = max(0.0, CFG["HARVEST_STRENGTH"] - 0.05)
+                    cfg["HARVEST_STRENGTH"] = max(0.0, cfg["HARVEST_STRENGTH"] - 0.05)
 
                 elif event.key == pygame.K_RIGHT:
-                    CFG["REGEN_RATE"] = min(1.0, CFG["REGEN_RATE"] + 0.01)
+                    cfg["REGEN_RATE"] = min(1.0, cfg["REGEN_RATE"] + 0.01)
 
                 elif event.key == pygame.K_LEFT:
-                    CFG["REGEN_RATE"] = max(0.0, CFG["REGEN_RATE"] - 0.01)
+                    cfg["REGEN_RATE"] = max(0.0, cfg["REGEN_RATE"] - 0.01)
 
                 elif event.key == pygame.K_RIGHTBRACKET:
-                    CFG["NOISE_STD"] = min(5.0, CFG["NOISE_STD"] + 0.01)
+                    cfg["NOISE_STD"] = min(5.0, cfg["NOISE_STD"] + 0.01)
 
                 elif event.key == pygame.K_LEFTBRACKET:
-                    CFG["NOISE_STD"] = max(0.0, CFG["NOISE_STD"] - 0.01)
+                    cfg["NOISE_STD"] = max(0.0, cfg["NOISE_STD"] - 0.01)
 
                 elif event.key == pygame.K_1:
-                    CFG["SIMULATION_SPEED"] = 1
+                    cfg["SIMULATION_SPEED"] = 1
 
                 elif event.key == pygame.K_2:
-                    CFG["SIMULATION_SPEED"] = 5
+                    cfg["SIMULATION_SPEED"] = 5
 
                 elif event.key == pygame.K_3:
-                    CFG["SIMULATION_SPEED"] = 20
+                    cfg["SIMULATION_SPEED"] = 20
 
                 elif event.key == pygame.K_4:
-                    CFG["SIMULATION_SPEED"] = 100
+                    cfg["SIMULATION_SPEED"] = 100
 
         if not paused:
-            for _ in range(CFG["SIMULATION_SPEED"]):
+            for _ in range(cfg["SIMULATION_SPEED"]):
                 sim.update()
 
-        screen.fill(CFG["BACKGROUND"])
+        screen.fill(cfg["BACKGROUND"])
 
-        world_rect = pygame.Rect(0, 0, CFG["WORLD_WIDTH"], CFG["HEIGHT"])
-        pygame.draw.rect(screen, CFG["BACKGROUND"], world_rect)
+        world_rect = pygame.Rect(0, 0, cfg["WORLD_WIDTH"], cfg["HEIGHT"])
+        pygame.draw.rect(screen, cfg["BACKGROUND"], world_rect)
 
         for flower in sim.flowers:
-            draw_flower(screen, flower, CFG, font_small)
+            draw_flower(screen, flower, cfg, font_small)
 
         draw_base(screen, sim)
 
         for bee in sim.bees:
-            draw_bee(screen, bee, sim.flowers, CFG)
+            draw_bee(screen, bee, sim.flowers, cfg)
 
         draw_world_ui(screen, sim, font, font_small)
         draw_panel(screen, sim, font, font_small)
