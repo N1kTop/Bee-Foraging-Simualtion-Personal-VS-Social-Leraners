@@ -36,6 +36,10 @@ version1_non_visual_bee_simulation.py - Earlier non-visual prototype version.
 sample_results/ - Example output graphs and CSV files.
 
 ## How to Run
+Clone Repository
+```
+git clone https://github.com/N1kTop/Bee-Foraging-Simualtion-Personal-VS-Social-Leraners
+```
 Install requirements
 ```
 pip install -r requirements.txt
